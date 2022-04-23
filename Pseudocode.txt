@@ -1,0 +1,28 @@
+for frame in frames
+    updated_already list
+    for particle in particle_list
+        if particle not in updated_already 
+            if particle bottom free
+                particle.gravity 
+            else 
+                particle.disperse
+            updated_already.append(particle)
+        particle.render
+
+Water flow
+
+for water_particle in water_particles
+    new_x, new_y = x, y
+    if grid[new_x][new_y+1] is empty
+        new_y += 1
+    else
+        for i from 0 to dispersion_rate
+            if grid[new_x+1][new_y] is empty
+                new_x += 1
+                if grid[new_x][new_y+1] is empty 
+                    new_y += 1
+            else 
+                break
+
+    grid[new_x][new_y] = grid[x][y]
+    grid[x][y] = air_particle 
