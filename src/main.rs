@@ -10,11 +10,12 @@ const TARGETFPS: u32 = 60;
 const ACCELERATION_GRAVITY: f32 = 0.2;
 const DISPERSION_RATE: i32 = 10;
 const BG_COLOR: Color = Color::BLACK;
-const PIXEL_SIZE: Vector2 = Vector2{x: 10.0, y: 10.0};
-const SMALLER_PIXEL: Vector2 = Vector2{x: 6.0, y: 6.0};
+const PIXEL_SIZE: Vector2 = Vector2{x: 7.0, y: 7.0};
+const SMALLER_PIXEL: Vector2 = Vector2{x: PIXEL_SIZE.x - 4.0, y: PIXEL_SIZE.y - 4.0};
 
 const GRID_WIDTH: usize = (WIDTH / PIXEL_SIZE.x as i32) as usize; 
 const GRID_HEIGHT: usize = (HEIGHT / PIXEL_SIZE.y as i32) as usize; 
+
 
 #[derive(Clone, Copy, PartialEq, Debug)]
 enum ParticleType{
@@ -239,12 +240,16 @@ fn input_handler(
                 ParticleType::Sand => {
                     if *draw_flag {
                         particle_grid[mouse_y][mouse_x] = Pixel::create_sand_particle();
+                        particle_grid[mouse_y][mouse_x + 2] = Pixel::create_sand_particle();
+                        particle_grid[mouse_y][mouse_x - 2] = Pixel::create_sand_particle();
                     }
                     *draw_flag = !*draw_flag;
                 },
                 ParticleType::Water => {
                     if *draw_flag {
                         particle_grid[mouse_y][mouse_x] = Pixel::create_water_particle();
+                        particle_grid[mouse_y][mouse_x + 2] = Pixel::create_water_particle();
+                        particle_grid[mouse_y][mouse_x - 2] = Pixel::create_water_particle();
                     }
                     *draw_flag = !*draw_flag;
                 },
